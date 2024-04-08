@@ -1,0 +1,68 @@
+.affix {
+top: 0;
+width: 100%;
+z-index: 9999 !important;
+}
+
+.affix ~ .container-fluid {
+position: relative;
+padding-top: 70px;
+}
+.myicon {
+vertical-align: middle;
+horizontal-align: right;
+width: 128px;
+height: 128px;
+border-radius: 60%;
+}
+
+.myicon22 {
+vertical-align: middle;
+horizontal-align: right;
+width: 22px;
+height: 22px;
+border-radius: 60%;
+}
+
+
+.blink {
+  animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+	
+textarea {
+overflow: scroll;
+resize: vertical;
+font-size: 2vw; 
+min-height:100px;   
+}
+
+.jumbotron{
+border-style: solid;
+border-color: #34495e;
+border-width: medium;
+}
+
+footer {
+background-color: #566573;
+color: white;
+padding: 10px;
+border-radius: 6px;
+}
+
+body{
+	height:1500px;
+	background: #839192;
+    font-family: ubuntu;
+}

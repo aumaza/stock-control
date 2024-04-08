@@ -1,0 +1,78 @@
+# database name [ stock_control  ]
+# create database stock_control
+
+#tabla usuarios
+create table sc_usuarios(
+id int(11) auto_increment primary key not null,
+name varchar(60) binary not null,
+user varchar(90) binary not null,
+password varchar(15) binary not null,
+cellphone varchar(35),
+email varchar(60) not null,
+address varchar(100) not null,
+state varchar(100) not null,
+city varchar(100) not null,
+province varchar(100) not null,
+role int(11) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#tabla productos
+create table sc_productos(
+id int(11) auto_increment primary key not null,
+cod_producto varchar(6) not null,
+descripcion varchar(60) not null,
+marca varchar(60) not null,
+cantidad int(11) not null,
+fabricante varchar(60) not null,
+nro_lote varchar(30) not null,
+precio float(8,2) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#crear tabla sc_proveedores
+create table sc_proveedores(
+id int(11) auto_increment primary key not null,
+nombre_proveedor varchar(90) not null,
+empresa varchar(90) not null,
+tipo_productos varchar(90) not null,
+email varchar(60) not null,
+movil varchar(11) not null,
+telefono varchar(11) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#crear tabla sc_caja
+create table sc_caja(
+id int(11) auto_increment primary key not null,
+fecha date not null,
+hora_apertura time,
+hora_cierre time,
+importe_apertura float(8,2),
+importe_cierre float(8,2),
+estado_caja enum('Abierta','Cerrada'),
+id_usuario_apertura int(11),
+id_usuario_cierre int(11)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#tabla ventas
+create table sc_ventas(
+id int(11) auto_increment primary key,
+descripcion varchar(40) not null,
+cantidad int(11) not null,
+id_empleado int(11),
+tipo_pago enum('Efectivo','Tarjeta Debito','Tarjeta Credito','Mercado Pago') not null,
+fecha_venta date not null,
+hora_venta time not null,
+importe float(8,2) not null,
+nro_ticket int(11) not null,
+estado_ticket enum('Abierto','Cerrado') not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#tabla pagos
+create table sc_pagos(
+id int(11) auto_increment primary key,
+tipo_pago enum('Proveedores','Servicios') not null,
+proveedor varchar(100),
+servicio varchar(100),
+fecha date not null,
+importe float(8,2) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
