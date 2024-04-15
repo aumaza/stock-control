@@ -1,0 +1,4 @@
+show tables;
+show columns from sc_usuarios;
+show columns from sc_permisos;
+show columns from sc_tipo_usuario;

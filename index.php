@@ -7,6 +7,7 @@
 		include "core/lib/lib_system.php";
         include "password/lib_password.php";
         include "regestry/lib_regestry.php";
+        include "about/lib_about.php";
 
 
 
@@ -78,6 +79,12 @@
         $oneRegistro = new Regestry();
         if(isset($_POST['signup'])){
             $oneRegistro->formRegestry();
+        }
+
+        // SE CREA OBJETO ABOUT
+        $oneAbout = new About();
+        if(isset($_POST['about'])){
+            $oneAbout->showAbout();
         }
 
     }else{

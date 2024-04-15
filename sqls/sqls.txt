@@ -13,18 +13,33 @@ address varchar(100) not null,
 state varchar(100) not null,
 city varchar(100) not null,
 province varchar(100) not null,
-role int(11) not null
+id_tipo_usuario int(11) not null,
+estado int(11) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# table tipo_usuario
+create table sc_tipo_usuario(
+id int(11) auto_increment primary key,
+descripcion varchar(100) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# tabla tipo productos
+create table sc_tipo_producto(
+id int(11) auto_increment primary key,
+descripcionvarchar(100) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #tabla productos
 create table sc_productos(
 id int(11) auto_increment primary key not null,
+id_tipo_producto int(11) not null,
 cod_producto varchar(6) not null,
 descripcion varchar(60) not null,
 marca varchar(60) not null,
 cantidad int(11) not null,
 fabricante varchar(60) not null,
 nro_lote varchar(30) not null,
+fecha_vencimiento date,
 precio float(8,2) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -76,3 +91,33 @@ fecha date not null,
 importe float(8,2) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+# tabla permisos
+create table if not exists sc_permisos(
+id int(11) auto_increment primary key,
+id_usuario int(11) not null,
+descripcion varchar(200) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# tabla countries
+create table if not exists sc_countries(
+id int(11) auto_increment primary key,
+spanish_name varchar(100) not null,
+english_name varchar(100) not null,
+iso2 varchar(5) not null,
+iso3 varchar(5) not null,
+phone_profix int(5) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# tabla provincias
+create table if not exists sc_provincias(
+id int(11) auto_increment primary key,
+categoria varchar(100) not null,
+centroide_lat varchar(100) not null,
+centroide_lon varchar(100) not null,
+fuente varchar(3) not null,
+cod_prov int(2) not null,
+iso_id varchar(6) not null,
+iso_nombre varchar(50) not null,
+nombre varchar(50) not null,
+nombre_completo varchar(50) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
