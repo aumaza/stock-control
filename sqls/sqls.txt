@@ -8,11 +8,12 @@ name varchar(60) binary not null,
 user varchar(90) binary not null,
 password varchar(15) binary not null,
 cellphone varchar(35),
-email varchar(60) not null,
-address varchar(100) not null,
-state varchar(100) not null,
-city varchar(100) not null,
-province varchar(100) not null,
+email varchar(60) binary not null,
+address varchar(100),
+state varchar(100),
+city varchar(100),
+province varchar(100),
+country varchar(100),
 id_tipo_usuario int(11) not null,
 estado int(11) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -121,3 +122,57 @@ iso_nombre varchar(50) not null,
 nombre varchar(50) not null,
 nombre_completo varchar(50) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# tabla localidades
+create table sc_localidades(
+id int(11) auto_increment primary key,
+categoria varchar(100) not null,
+centroide_lat varchar(100) not null,
+centroide_lon varchar(100) not null,
+departamento_id varchar(100) not null,
+departamento_nombre varchar(100) not null,
+fuente varchar(10) not null,
+id_localidad int(11) not null,
+localidad_censal_id int(11) not null,
+localidad_censal_nombre varchar(100) not null,
+municipio_id int(11) not null,
+municipio_nombre varchar(150) not null,
+nombre varchar(150) not null,
+provincia_id int(11) not null,
+provincia_nombre varchar(150) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# tabla municipios
+create table sc_municipios(
+id int(11) auto_increment primary key,
+categoria varchar(50) not null,
+centroide_lat varchar(100) not null,
+centroide_lon varchar(100) not null,
+fuente varchar(10) not null,
+id_municipio int(11) not null,
+nombre varchar(100) not null,
+nombre_completo varchar(100) not null,
+provincia_id int(11) not null,
+provincia_interseccion float(10.10) not null,
+provincia_nombre varchar(100)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#subir csv countries
+load data local infile '/mnt/storage/server/stock-control/sqls/paises.csv'
+into table sc_countries fields terminated by ',' enclosed by '"' lines terminated by '\n' ignore 1 lines
+(spanish_name,english_name,iso2,iso3,phone_profix);
+
+#subir csv provincias
+load data local infile '/mnt/storage/server/stock-control/sqls/provincias.csv'
+into table sc_provincias fields terminated by ',' enclosed by '"' lines terminated by '\n' ignore 1 lines
+(categoria,centroide_lat,centroide_lon,fuente,cod_prov,iso_id,iso_nombre,nombre,nombre_completo);
+
+#subir csv localidades
+load data local infile '/mnt/storage/server/stock-control/sqls/localidades.csv'
+into table sc_localidades fields terminated by ',' enclosed by '"' lines terminated by '\n' ignore 1 lines
+(categoria,centroide_lat,centroide_lon,departamento_id,departamento_nombre,fuente,id_localidad,localidad_censal_id,localidad_censal_nombre,municipio_id,municipio_nombre,nombre,provincia_id,provincia_nombre);
+
+#subir csv municipios
+load data local infile '/mnt/storage/server/stock-control/sqls/municipios.csv'
+into table sc_municipios fields terminated by ',' enclosed by '"' lines terminated by '\n' ignore 1 lines
+(categoria,centroide_lat,centroide_lon,fuente,id_municipio,nombre,nombre_completo,provincia_id,provincia_interseccion,provincia_nombre);

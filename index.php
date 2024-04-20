@@ -78,8 +78,11 @@
         // SE CREA EL OBJETO REGISTRO
         $oneRegistro = new Regestry();
         if(isset($_POST['signup'])){
-            $oneRegistro->formRegestry();
+            $oneRegistro->formRegestry($conn,$db_basename);
         }
+
+        // modal
+        $oneRegistro->myModalAdministrador();
 
         // SE CREA OBJETO ABOUT
         $oneAbout = new About();

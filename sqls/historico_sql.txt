@@ -1,4 +1,14 @@
 show tables;
+
 show columns from sc_usuarios;
 show columns from sc_permisos;
 show columns from sc_tipo_usuario;
+show columns from sc_countries;
+show columns from sc_provincias;
+show columns from sc_localidades;
+show columns from sc_municipios;
+
+select * from sc_countries;
+select * from sc_provincias;
+select * from sc_localidades;
+select * from sc_municipios;

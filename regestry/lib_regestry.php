@@ -8,6 +8,13 @@ class Regestry{
 	private $user = '';
 	private $password = '';
 	private $avatar = '';
+    private $cellphone = '';
+    private $address = '';
+    private $state = '';
+    private $city = '';
+    private $province = '';
+    private $country = '';
+    private $id_tipo_usuario = '';
 	private $task = '';
 	private $role = '';
 
@@ -18,6 +25,13 @@ class Regestry{
 		$this->user = '';
 		$this->password = '';
 		$this->avatar = '';
+        $this->cellphone = '';
+        $this->address = '';
+        $this->state = '';
+        $this->city = '';
+        $this->province = '';
+        $this->country = '';
+        $this->id_tipo_usuario = '';
 		$this->task = '';
 		$this->role = '';
 	}
@@ -41,6 +55,34 @@ class Regestry{
 
 	private function setAvatar($var){
 		$this->avatar = $var;
+	}
+
+	private function setCellphone($var){
+		$this->cellphone = $var;
+	}
+
+	private function setAddress($var){
+		$this->address = $var;
+	}
+
+	private function setState($var){
+		$this->state = $var;
+	}
+
+	private function setCity($var){
+		$this->city = $var;
+	}
+
+	private function setProvince($var){
+		$this->province = $var;
+	}
+
+	private function setCountry($var){
+		$this->country = $var;
+	}
+
+	private function setIdTipoUsuario($var){
+		$this->id_tipo_usuario = $var;
 	}
 
 	private function setTask($var){
@@ -72,6 +114,34 @@ class Regestry{
 		return $this->avatar = $var;
 	}
 
+    private function getCellphone($var){
+		return $this->cellphone = $var;
+	}
+
+	private function getAddress($var){
+		return $this->address = $var;
+	}
+
+	private function getState($var){
+		return $this->state = $var;
+	}
+
+	private function getCity($var){
+		return $this->city = $var;
+	}
+
+	private function getProvince($var){
+		return $this->province = $var;
+	}
+
+	private function getCountry($var){
+		return $this->country = $var;
+	}
+
+	private function getIdTipoUsuario($var){
+		return $this->id_tipo_usuario = $var;
+	}
+
 	private function getTask($var){
 		return $this->task = $var;
 	}
@@ -85,7 +155,25 @@ class Regestry{
 */
 
 
-public function formRegestry(){
+public function formRegestry($conn,$db_basename){
+
+        // verificar si existe usuario root
+        mysqli_select_db($conn,$db_basename);
+        $sql = "select from sc_usuarios where id_tipo_usuario = 1";
+        $query = mysqli_query($conn,$sql);
+        $rows = mysqli_num_rows($query);
+
+        if($rows == 0){
+
+            echo '<div class="container">
+                            <div class="alert alert-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Atención!</strong> Aún no se ha creado el usuario Administrador.
+                                <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModalAdministrador">Crear usuario Administrador</button>
+                            </div>
+                        </div>';
+
+        }else{
+
 
 		echo '<div class="container">
 					<div class="jumbotron">
@@ -148,9 +236,88 @@ public function formRegestry(){
 				  
 				</div>
 				</div>';
+        }
 
 }
 
+
+/*
+ * * FUNCION MODAL REGISTRO ADMINISTRADOR
+ */
+public function myModalAdministrador(){
+    echo '<div class="modal fade" id="myModalAdministrador" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" align="center">Registro de usuario Administrador</h4>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="jumbotron">
+                                   <p>Por favor complete los datos que le solicitamos para poder generar su usuario<hr>
+
+                                <form id="fr_new_user_ajax" method="POST" enctype="multipart/form-data">
+
+                                    <input type="hidden" id="tasks" name="tasks"  value="1">
+
+                                    <div class="form-group">
+                                    <label for="name">Nombre y Apellido:</label>
+                                    <input type="text" class="form-control" id="name" name="name"  value="Administraor" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email"  value="root@gmail.com" readonly>
+                                    </div>
+
+                                    <div class="alert alert-info">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><strong>Atención!</strong> Puede seleccionar una imagen a modo de Avatar. No es obligatorio realizarlo ahora, padrá agregarla más tarde.
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="my_file">Seleccione archivo:</label>
+                                        <input type="file" id="my_file" name="my_file">
+                                    </div>
+
+                                    <div class="alert alert-info">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><strong>Atención!</strong> Para generar su password no utilice fechas de cumpleaños, ni datos filiatorios.
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="pwd">Password:</label>
+                                    <input type="password" class="form-control" id="pwd_1" name="pwd_1" placeholder="Ingrese su password">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="pwd">Repita Password:</label>
+                                    <input type="password" class="form-control" id="pwd_2" name="pwd_2" placeholder="Repita su password">
+                                    </div><br>
+
+                                    <div class="alert alert-success">
+
+                                        <button type="submit" class="btn btn-default btn-block" id="new_user" name="new_user"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registrar</button>
+
+                                    </div>
+
+                                </form><hr>
+
+                                <div id="messageNewUser"></div>
+
+                                </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Cerrar</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>';
+}
 
 /*
 ** FUNCTION FOR ADD NEW REGESTRY TO DATABASE 
